@@ -19,8 +19,8 @@ class Motor:
         KIPR.freeze(self.port)
     
     def gmd(self):
-        """Returns True if the motor has finished moving, False otherwise."""
-        return bool(KIPR.get_motor_done(self.port))
+        """Returns 1 if the motor has finished moving, 0 otherwise."""
+        return KIPR.get_motor_done(self.port)
     
     def bmd(self):
         """Waits until the motor has finished moving."""
@@ -47,7 +47,7 @@ class Motor:
         KIPR.motor_power(self.port, percentPower)
     
     def mav(self, speed):
-        """Sets the motor to move at the specified speed."""
+        """Sets the motor to move at the specified speed in -1500 to 1500 ticks / second."""
         KIPR.move_at_velocity(self.port, speed)
     
     def mtp(self, speed, pos):

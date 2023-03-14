@@ -7,27 +7,27 @@ class Wheels:
         self.diameter = diameter
         self.spacing = spacing
         
-        self.wheelU = math.pi * self.diameter   
-        self.rotarionU = math.pi * self.spacing
+        self.wheelU = 3.14159265359 * self.diameter   
+        self.rotarionU = 3.14159265359 * self.spacing
         
     
     def distanceToTicks(self, distance):
-        # calculate the number of ticks required to travel a given distance
+        """ calculate the number of ticks required to travel a given distance """
         return int(distance / self.wheelU * 1800)
     def ticksToDistance(self, ticks):
-        # calculate the distance travelled given a number of ticks
+        """ calculate the distance travelled given a number of ticks """
         return ticks / 1800 * self.wheelU
     def angleToTicks(self, angle):
-        # calculate the number of ticks required to rotate a given angle
+        """ calculate the number of ticks required to rotate a given angle """
         return int(angle / 360 * 1800)
     def ticksToAngle(self, ticks):
-        # calculate the angle of rotation given a number of ticks
+        """ calculate the angle of rotation given a number of ticks """
         return ticks / 1800 * 360
     def distanceToAngle(self, distance):
-        # calculate the angle of rotation required to travel a given distance
+        """ calculate the angle of rotation required to travel a given distance """
         return distance / self.wheelU * 360
     def angleToDistance(self, angle):
-        # calculate the distance travelled given a rotation angle
+        """ calculate the distance travelled given a rotation angle """
         return angle / 360 * self.wheelU    
     
               
@@ -55,15 +55,15 @@ class Wheels:
         self.motorRight.bmd()
         self.motorLeft.bmd()
 
-    def fd(self):
-        """Move both motors forward at full power."""
-        self.motorRight.fd()
-        self.motorLeft.fd()
+    def fd(self, percentVelocity):
+        """Sets the motor to move forward at the specified percentage of maximum velocity."""
+        self.motorRight.fd(percentVelocity)
+        self.motorLeft.fd(percentVelocity)
 
-    def bk(self):
-        """Move both motors backward at full power."""
-        self.motorRight.bk()
-        self.motorLeft.bk()
+    def bk(self, percentVelocity):
+        """Sets the motor to move backward at the specified percentage of maximum velocity."""
+        self.motorRight.bk(percentVelocity)
+        self.motorLeft.bk(percentVelocity)
 
     def mapv(self, percentVelocity):
         """Set the goal velocity for both motors in ticks per second."""
@@ -79,9 +79,6 @@ class Wheels:
         """Turn off both motors."""
         self.motorRight.off()
         self.motorLeft.off()
-
-    def alloff(self):
-        KIPR.alloff()
 
     def mav(self, speed):
         """ Move both motors with speed in ticks per second """
