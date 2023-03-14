@@ -57,6 +57,25 @@ class Servo:
         """
         KIPR.set_servo_position(self.port, position)        
         
+    def timed_movement(self, position, time = 1000):
+        """ Move the servo to a specific position in a specified total time in ms """
+        currentPos = self.get_position()
+        startPos = currentPos
+        stepSize = 0
+        stepTime = 0
+        while stepTime == 0:
+            stepSize += (1 if (position>currentPos) else -1)
+            stepTime = int(time / ((position-currentPos)/stepSize))
+        substepCount = (position-currentPos) // stepSize
+        #print(stepTime, stepSize, substepCount)
+        for x in range(1, substepCount+1):
+            #print(f"move to: {startPos+stepSize*x}, wait: {stepTime}")
+            self.set_position(startPos + stepSize*x)
+            KIPR.msleep(stepTime)
+        #print(f"move to: {position}")
+        self.set_position(position)
+    
+        
     @staticmethod
     def enable_all():
         """
