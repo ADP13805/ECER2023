@@ -1,24 +1,24 @@
 class Servo:
-    def __init__(self, port: int):
+    def __init__(self, port):
         self.port = port
                 
-    def __str__(self) -> str:
+    def __str__(self):
         return str(self.get_position())
     
     
-    def enable(self) -> None:
+    def enable(self):
         """
         Enable a specific servo.
         """
         KIPR.enable_servo(self.port)
         
-    def disable(self) -> None:
+    def disable(self):
         """
         Disable a specific servo.
         """
         KIPR.disable_servo(self.port)
     
-    def set_enabled(self, enabled: int) -> None:
+    def set_enabled(self, enabled):
         """
         Enable or disable a specific servo.
 
@@ -27,7 +27,7 @@ class Servo:
         """
         KIPR.set_servo_enabled(self.port, enabled)
         
-    def get_enabled(self) -> int:
+    def get_enabled(self):
         """
         Check if a servo is enabled.
 
@@ -36,7 +36,7 @@ class Servo:
         """
         return KIPR.get_servo_enabled(self.port)
     
-    def get_position(self) -> int:
+    def get_position(self):
         """
         Get the most recent commanded servo position.
 
@@ -45,7 +45,7 @@ class Servo:
         """
         return KIPR.get_servo_position(self.port)
     
-    def set_position(self, position: int) -> None:
+    def set_position(self, position):
         """
         Set a new servo goal position.
 
@@ -55,20 +55,17 @@ class Servo:
         Note:
         - Even though the servos have a theoretical range between 0 and 2047, the actual range is often less. Setting the servo to a position that it cannot physically reach will cause the servo to audibly strain and will consume battery very quickly.
         """
-        KIPR.set_servo_position(self.port, position)
-        
-    def slow_movement(self, position: int, time: int) -> None:
-        
+        KIPR.set_servo_position(self.port, position)        
         
     @staticmethod
-    def enable_all() -> None:
+    def enable_all():
         """
         Enable all four servo channels.
         """
         KIPR.enable_servos()
     
     @staticmethod
-    def disable_all() -> None:
+    def disable_all():
         """
         Disable all four servo channels.
         """
